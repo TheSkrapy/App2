@@ -6,4 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".Escaner">
 
+    <EditText
+        android:id="@+id/txtResultado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="100dp"
+        tools:layout_editor_absoluteY="205dp" />
+
+    <Button
+        android:id="@+id/btnScan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scan"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="102dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

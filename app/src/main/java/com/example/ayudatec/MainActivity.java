@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        btnEscanear = (Button) findViewById(R.id.btnScan);
+        btnEscanear = (Button) findViewById(R.id.btnScanear);
         btnGenerar=(Button) findViewById(R.id.btnCrear);
 
 
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         btnGenerar.setOnClickListener(view -> {
-            Intent c = new Intent(MainActivity.this, ContrasenaCrearQr.class);
+            Intent c = new Intent(MainActivity.this, CrearQr.class);
             startActivity(c);
         });
 
