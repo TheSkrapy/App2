@@ -17,12 +17,13 @@ public class CrearQr extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_qr);
+
+        setContentView(R.layout.activity_crear_qr);   //Declaracion de argumentos para generar qr
         EditText txtDatos = findViewById(R.id.txtDatos);
         Button btnGenera = findViewById(R.id.btnGenera);
         ImageView imgQr = findViewById(R.id.qrCode);
 
-        btnGenera.setOnClickListener(view -> {
+        btnGenera.setOnClickListener(view -> {  //Metodo para generar qr
             try{
                 BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                 Bitmap bitmap = barcodeEncoder.encodeBitmap(txtDatos.getText().toString(), BarcodeFormat.QR_CODE, 750,750);

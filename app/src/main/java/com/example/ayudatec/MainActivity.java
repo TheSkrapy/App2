@@ -16,17 +16,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        btnEscanear = (Button) findViewById(R.id.btnScanear);
+        btnEscanear = (Button) findViewById(R.id.btnScanear); //Declaracion de botones
         btnGenerar=(Button) findViewById(R.id.btnCrear);
 
 
-        btnEscanear.setOnClickListener(view -> {
+        btnEscanear.setOnClickListener(view -> {  //Funcionamiento del boton escaner
             Intent c = new Intent(MainActivity.this, Escaner.class);
             startActivity(c);
         });
 
-        btnGenerar.setOnClickListener(view -> {
-            Intent c = new Intent(MainActivity.this, CrearQr.class);
+        btnGenerar.setOnClickListener(view -> {  //Funcionamiento del boton generar
+            Intent c = new Intent(MainActivity.this, ContrasenaCrearQr.class);
             startActivity(c);
         });
 

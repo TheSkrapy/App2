@@ -21,10 +21,10 @@ public class Escaner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_escaner);
 
-        btnScan = findViewById(R.id.btnScan);
+        btnScan = findViewById(R.id.btnScan);  //Declaracion de argumentos para generar qr
         txtResultado = findViewById(R.id.txtResultado);
 
-        btnScan.setOnClickListener(new View.OnClickListener() {
+        btnScan.setOnClickListener(new View.OnClickListener() {  //Boton para pasar a usar el scaner
             @Override
             public void onClick(View view) {
                 IntentIntegrator integrador = new IntentIntegrator(Escaner.this);
@@ -38,7 +38,7 @@ public class Escaner extends AppCompatActivity {
         });
     }
 
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) { //Presentacion del resultado
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
         if(result != null){
