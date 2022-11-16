@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-    Button btnEscanear;
-    Button btnGenerar;
+
+    ImageButton btnEscanear;
+    ImageButton btnGenerar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        btnEscanear = (Button) findViewById(R.id.btnScanear); //Declaracion de botones
-        btnGenerar=(Button) findViewById(R.id.btnCrear);
+        btnEscanear = (ImageButton) findViewById(R.id.btnScanear); //Declaracion de botones
+        btnGenerar=(ImageButton) findViewById(R.id.btnCrear);
 
 
         btnEscanear.setOnClickListener(view -> {  //Funcionamiento del boton escaner

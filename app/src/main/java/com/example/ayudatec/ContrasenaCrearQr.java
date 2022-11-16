@@ -27,8 +27,8 @@ public class ContrasenaCrearQr extends AppCompatActivity {
                 String User= user.getText().toString();
                 String Contra= contra.getText().toString();
 
-                if (User.equals("Admin") && Contra.equals("1234")){ //Validacion de contraseña
-                        Intent c = new Intent(ContrasenaCrearQr.this, CrearQr.class);
+                if (User.equals("Admin") && Contra.equals("SGD 04051125")){ //Validacion de contraseña
+                        Intent c = new Intent(ContrasenaCrearQr.this, Formulario.class);
                         startActivity(c);
                 }
                 else {  //Respuesta a contraseña incorrecta
