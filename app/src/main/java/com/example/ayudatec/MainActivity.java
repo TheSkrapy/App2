@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         btnEscanear.setOnClickListener(view -> {  //Funcionamiento del boton escaner
-            Intent c = new Intent(MainActivity.this, Escaner.class);
+            Intent c = new Intent(MainActivity.this, MostrarFormulario.class);
             startActivity(c);
         });
 
