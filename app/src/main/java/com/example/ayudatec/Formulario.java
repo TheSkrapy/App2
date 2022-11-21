@@ -2,7 +2,9 @@ package com.example.ayudatec;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -26,6 +28,10 @@ public class Formulario extends AppCompatActivity {
         String AM=  Am.getText().toString();
         String Carrera=  carrera.getText().toString();
 
+        btnGenerar.setOnClickListener(view -> {
+            Intent c = new Intent(Formulario.this, CrearQr.class);
+            startActivity(c);
+        });
 
     }
 }
