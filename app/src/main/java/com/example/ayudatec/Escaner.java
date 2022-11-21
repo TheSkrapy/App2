@@ -33,7 +33,7 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
 
     Handler handler = new Handler();
     @SuppressWarnings("deprecation")
-    ProgressDialog progressDialog;
+    ProgressDialog progressDialog; //Se muestra mientras se obtienen datos remotos
     TextView txtNcontrol;
     TextView txtNombre;
     TextView txtApellidoP;
@@ -50,7 +50,7 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
         txtApellidoM = findViewById(R.id.textView6);
         txtCarrera = findViewById(R.id.textView8);
 
-        IntentIntegrator integrador = new IntentIntegrator(Escaner.this);
+        IntentIntegrator integrador = new IntentIntegrator(Escaner.this); //Lector QR configuración
         integrador.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE);
         integrador.setPrompt("Lector QR");
         integrador.setCameraId(0);
@@ -68,7 +68,7 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
             }
             else {
                 Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
-                new fetchData(result.getContents(), this).start();
+                new fetchData(result.getContents(), this).start(); //Obtiene datos remotos
             }
         }
         else {
@@ -78,6 +78,7 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
 
     @Override
     public void onClick(int ncontrol, String nombre, String apellidoP, String apellidoM, String foto, String carrera) {
+        //Interfaz que permite actualizar datos en formulario desde clase fetcData
         txtNcontrol.setText(ncontrol+"");
         txtNombre.setText(nombre);
         txtApellidoP.setText(apellidoP);
@@ -87,16 +88,9 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
 
     class fetchData extends Thread{
         String str;
-        String data = "";
         OnScanQr qrData;
-        int ncontrol;
-        String nombre;
-        String apellidoP;
-        String apellidoM;
-        String foto = "";
-        String carrera;
 
-        public fetchData (String str, OnScanQr qrData){
+        public fetchData (String str, OnScanQr qrData){ //Constructor
             this.str = str;
             this.qrData = qrData;
         }
@@ -104,13 +98,21 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
         @SuppressWarnings("deprecation")
         @Override
         public void run(){
-            handler.post(() -> {
+            String data = ""; //JSON data
+            int ncontrol; //Datos a obtener
+            String nombre;
+            String apellidoP;
+            String apellidoM;
+            String foto = "";
+            String carrera;
+
+            handler.post(() -> { //Configuración progress dialog
                 progressDialog = new ProgressDialog( Escaner.this );
                 progressDialog.setMessage("Obteniendo datos...");
                 progressDialog.setCancelable(false);
                 progressDialog.show();
             });
-            try{
+            try{ //Realiza get request a URL
                 URL url = new URL( str );
                 HttpURLConnection httpURLConnection = ( HttpURLConnection ) url.openConnection();
                 InputStream inputStream = httpURLConnection.getInputStream();
@@ -118,17 +120,18 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
                 String line;
 
                 while ( (line = bufferedReader.readLine()) != null ){
-                    data = new StringBuilder().append(data).append(line).toString();
+                    data = data + line;
                 }
-                if (!data.isEmpty()){
-
+                if (!data.isEmpty()){ //Si petición es exitosa
                     JSONObject jsonObject = new JSONObject(data);
                     JSONObject jsonA = jsonObject.getJSONObject("data");
 
                     ncontrol = jsonA.getInt("ncontrol");
                     nombre = jsonA.getString("nombre");
                     carrera = jsonA.getString("carrera");
-                    //Detectar apellido paterno, y apellido materno (proceso manual) posibles errores, recomendable cambiar diseno db
+
+                    //Detectar del nombre completo el apellido paterno, apellido materno, y nombre(s)
+                    //(proceso manual) posibles errores, recomendable cambiar diseño db
                     ArrayList<String> nombreC = new ArrayList<>(5);
                     StringBuilder n = new StringBuilder();
                     int length = 0;
@@ -162,10 +165,12 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
 
                     apellidoP = nombreC.get(length - 2);
                     apellidoM = nombreC.get(length - 1);
-                    try {
+
+                    try { //Para evitar error al actualizar UI desde hilo secundario
                         synchronized (this) {
                             wait(2000);
-                            runOnUiThread(() -> qrData.onClick(ncontrol, nombre, apellidoP, apellidoM, foto, carrera));
+                            String finalNombre = nombre;
+                            runOnUiThread(() -> qrData.onClick(ncontrol, finalNombre, apellidoP, apellidoM, foto, carrera));
                         }
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -176,9 +181,8 @@ public class Escaner extends AppCompatActivity implements OnScanQr {
                 e.printStackTrace();
             }
 
-            handler.post(() -> {
+            handler.post(() -> { //Dejar de mostrar progress dialog al obtener datos remotos
                 if (progressDialog.isShowing()) progressDialog.dismiss();
-
             });
         }
     }
