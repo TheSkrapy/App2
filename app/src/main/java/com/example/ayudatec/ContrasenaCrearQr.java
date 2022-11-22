@@ -26,8 +26,10 @@ public class ContrasenaCrearQr extends AppCompatActivity {
                 EditText contra =findViewById(R.id.txtContra);
                 String User= user.getText().toString();
                 String Contra= contra.getText().toString();
+                //String pass = "SGD 04051125";
+                String pass ="123";
 
-                if (User.equals("Admin") && Contra.equals("SGD 04051125")){ //Validacion de contraseña
+                if (User.equals("Admin") && Contra.equals(pass)){ //Validacion de contraseña
                         Intent c = new Intent(ContrasenaCrearQr.this, Formulario.class);
                         startActivity(c);
                 }

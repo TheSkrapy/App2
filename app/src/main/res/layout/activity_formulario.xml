@@ -75,28 +75,37 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="70dp"
         android:ems="10"
         android:hint="Apellido materno"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView9"
         app:layout_constraintTop_toBottomOf="@+id/txtApellidoP" />
 
-    <EditText
-        android:id="@+id/txtCarrera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="213dp"
+        android:layout_height="55dp"
         android:layout_marginStart="22dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="41dp"
         android:layout_marginEnd="70dp"
         android:ems="10"
-        android:hint="Carrera"
-        android:inputType="textPersonName"
+        android:hint="@string/select"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/imageView11"
-        app:layout_constraintTop_toBottomOf="@+id/txtApellidoM" />
+        app:layout_constraintTop_toBottomOf="@+id/txtApellidoM">
+
+        <AutoCompleteTextView
+            android:id="@+id/txtCarrera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <ImageButton
         android:id="@+id/btnGenerar"
@@ -134,8 +143,8 @@
         android:id="@+id/imageView11"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="44dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView9"
         app:srcCompat="@drawable/carrera" />
@@ -168,7 +177,7 @@
         android:layout_marginTop="9dp"
         android:layout_marginEnd="42dp"
         android:fontFamily="@font/montserrat"
-        android:shadowColor="@android:color/system_accent1_700"
+        android:shadowColor="@color/purple_700"
         android:shadowRadius="15"
         android:text="Registro de alumno"
         android:textColor="@color/purple_500"
