@@ -22,6 +22,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+class global { //Clase para poder utilizar una variable global
+    public static String baseUrl = "https://itr-data-api.azurewebsites.net/";
+    public static String url = "";
+}
+
 public class Formulario extends AppCompatActivity {
     ImageButton btnGenerar;
     ArrayAdapter<String> adapterItems;
@@ -29,7 +34,8 @@ public class Formulario extends AppCompatActivity {
     String Nombre;
     String AP;
     String AM;
-    String Carrera="";
+    String Carrera;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +79,11 @@ public class Formulario extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<Alumno> call, @NonNull Response<Alumno> response) {
                 Log.e(TAG, "onResponse:" + response.code());
+                //if (response.code() == 200){
+                    global.url = global.baseUrl+"api/alumnos/"+NC;
+                    Intent c = new Intent(Formulario.this, CrearQr.class);
+                    startActivity(c);
+                //}
                // Log.e(TAG, "onResponse: ncontrol" + response.body().getNcontrol());
             }
 

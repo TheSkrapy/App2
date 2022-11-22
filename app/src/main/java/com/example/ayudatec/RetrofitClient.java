@@ -9,7 +9,7 @@ public class RetrofitClient {
     public static Retrofit getRetrofitInstance(){
         if (retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("https://itr-data-api.azurewebsites.net/")
+                    .baseUrl(global.baseUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
